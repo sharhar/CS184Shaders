@@ -1,0 +1,1 @@
+#define CEL_SHADING //Enables cell shading.
