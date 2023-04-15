@@ -1,1 +1,10 @@
 option.CEL_SHADING=Cell Shading
+
+option.TORCH_R = Red component of torch color
+option.TORCH_G = Green component of torch color
+option.TORCH_B = Blue component of torch color
+
+option.BRIGHTNESS = Ambient lighting
+
+screen.SHADING = Shading
+screen.CUSTOM_TORCH = Custom Torch Colors

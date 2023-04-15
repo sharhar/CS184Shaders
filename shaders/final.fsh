@@ -1,6 +1,6 @@
 #version 120
 
-#define CEL_SHADING
+#include "lib/Uniforms.inc"
 
 varying vec2 TexCoords;
 
