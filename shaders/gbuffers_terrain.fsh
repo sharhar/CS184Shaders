@@ -1,22 +1,19 @@
 #version 120
 
-uniform sampler2D lightmap;
+varying vec2 TexCoords;
+varying vec3 Normal;
+varying vec4 Color;
+varying vec2 LightmapCoords;
+
+// The texture atlas
 uniform sampler2D texture;
 
-varying vec2 lmcoord;
-varying vec2 texcoord;
-varying vec4 glcolor;
-varying vec3 Normal;
-
-varying vec2 lightmapCoords;
-
-uniform vec3 sunPosition;
-
-void main() {
-	vec4 color = texture2D(texture, texcoord) * glcolor;
-
-	/* DRAWBUFFERS:012 */
-	gl_FragData[0] = color;
-	gl_FragData[1] = vec4(Normal * 0.5f + 0.5f, 1.0f);
-	gl_FragData[2] = vec4(lightmapCoords, 0.0f, 1.0f);
+void main(){
+    // Sample from texture atlas and account for biome color + ambien occlusion
+    vec4 albedo = texture2D(texture, TexCoords) * Color;
+    /* DRAWBUFFERS:012 */
+    // Write the values to the color textures
+    gl_FragData[0] = albedo;
+    gl_FragData[1] = vec4(Normal * 0.5f + 0.5f, 1.0f);
+    gl_FragData[2] = vec4(LightmapCoords, 0.0f, 1.0f);
 }
