@@ -53,7 +53,6 @@ void adjustLightmap(in vec2 lightmap){
 
 vec3 getLightmapColor(in vec2 lightmap){
 	const vec3 torchColor = vec3(TORCH_R, TORCH_G, TORCH_B);
-	//const vec3 skyColor = vec3(0.13f, 0.18f, 0.51f);
 
 	return lightmap.x * torchColor + lightmap.y * (skyColor + vec3(0.0f, 0.0f, 0.0f));
 }
@@ -117,14 +116,18 @@ void main() {
 	//Shadow calculation
 	vec3 shadow = getShadow(depth);
 	
-
 	//Direct illumination calculation
 	vec3 normal = normalize(texture2D(colortex1, texcoord).rgb * 2.0f - 1.0f);
 
 	float NdotL = max(dot(normal, normalize(sunPosition)), 0.0f);
 
+	vec3 totalLighting = lightmapColor + shadow * NdotL + BRIGHTNESS;
+	float totalLightIntensity = length(totalLighting);
+	vec3 totalLightColor = normalize(totalLighting);
+
 	//Final output color
-	color *= (lightmapColor + shadow * NdotL + BRIGHTNESS);
+	color *= totalLightColor;
+	color *= min(totalLightIntensity, 3.0)*0.75;
 
 /* DRAWBUFFERS:0 */
 	gl_FragData[0] = vec4(color, 1.0f);
