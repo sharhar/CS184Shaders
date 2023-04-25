@@ -10,8 +10,6 @@ varying vec3 Normal;
 
 varying vec2 lightmapCoords;
 
-uniform vec3 sunPosition;
-
 void main() {
 	vec4 color = texture2D(texture, texcoord) * glcolor;
 

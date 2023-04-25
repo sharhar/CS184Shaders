@@ -15,7 +15,9 @@ void main() {
 	vec4 pos = gl_Vertex;//ftransform();
 
 	if(mc_Entity.x == 18.0) {
-		pos.xyz += sin(frameTimeCounter + pos.x)/10 + cos(frameTimeCounter + pos.y/3)/5;
+		pos.x += sin(4.5*frameTimeCounter + 38 + pos.y)/80 + cos(3.5*frameTimeCounter + 39 + pos.z)/80;
+		pos.y += sin(5*frameTimeCounter + 20 + pos.x)/80 + cos(3*frameTimeCounter + 34 + pos.y)/80;
+		pos.z += sin(5.5*frameTimeCounter + 29 + pos.x)/80 + cos(2.5*frameTimeCounter + 29 + pos.y)/80;
 	}	
 
 	lightmapCoords = mat2(gl_TextureMatrix[1]) * gl_MultiTexCoord1.st;
