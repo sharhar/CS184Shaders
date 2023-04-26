@@ -10,7 +10,9 @@ varying vec3 Normal;
 
 void main() {
 	vec4 color = texture2D(texture, texcoord) * glcolor;
-	//color *= texture2D(lightmap, lmcoord);
+
+	color.a /= 1.2;
+
 
 /* DRAWBUFFERS:012 */
 	gl_FragData[0] = color; //gcolor
