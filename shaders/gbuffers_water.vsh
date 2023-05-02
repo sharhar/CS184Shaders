@@ -4,19 +4,27 @@ varying vec2 lmcoord;
 varying vec2 texcoord;
 varying vec4 glcolor;
 varying vec3 Normal;
+varying float isWater;
+varying vec4 wPos;
+
+attribute vec4 mc_Entity;
 
 uniform float frameTimeCounter;
+uniform vec3 cameraPosition;
 
 void main() {
 	vec4 pos = gl_Vertex;//ftransform();
+	wPos = pos + vec4(cameraPosition.xyz, 0.0);
 
-	vec4 newpos = pos;
-
-	newpos.x += sin(1.5*frameTimeCounter +   pos.y)/100 + cos(6*frameTimeCounter + pos.z)/300;
-	newpos.y += sin(   2*frameTimeCounter + 7*pos.x)/30 + cos(5*frameTimeCounter + 9*pos.z)/30;
-	newpos.z += sin(0.5*frameTimeCounter +   pos.x)/100 + cos(4*frameTimeCounter  + pos.y)/300;
-
-	pos = newpos;
+	if(mc_Entity.x != 102.0 && mc_Entity.x != 95.0 && mc_Entity.x != 160) {
+		pos.y += sin(4.5*frameTimeCounter + 10*wPos.x)/30 + cos(5*frameTimeCounter + 10*wPos.z)/30;
+		
+		wPos.x += cos(0.6 * frameTimeCounter + wPos.x) / 16 + sin(frameTimeCounter + wPos.z) / 16;
+		
+		isWater = 1.0f;
+	} else {
+		isWater = 0.0f;
+	}
 
 	gl_Position = gl_ModelViewProjectionMatrix * pos;
 

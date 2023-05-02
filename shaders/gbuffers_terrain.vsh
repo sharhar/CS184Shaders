@@ -10,15 +10,22 @@ varying vec2 lightmapCoords;
 attribute vec4 mc_Entity;
 
 uniform float frameTimeCounter;
+uniform vec3 cameraPosition;
 
 void main() {
 	vec4 pos = gl_Vertex;//ftransform();
 
+	vec4 newpos = pos;
+	
+	pos += vec4(cameraPosition, 0.0);
+
 	if(mc_Entity.x == 18.0) {
-		pos.x += sin(4.5*frameTimeCounter + 38 + pos.y)/80 + cos(3.5*frameTimeCounter + 39 + pos.z)/80;
-		pos.y += sin(5*frameTimeCounter + 20 + pos.x)/80 + cos(3*frameTimeCounter + 34 + pos.y)/80;
-		pos.z += sin(5.5*frameTimeCounter + 29 + pos.x)/80 + cos(2.5*frameTimeCounter + 29 + pos.y)/80;
-	}	
+		newpos.x += sin(2.5*frameTimeCounter + 38 + pos.y)/120 + cos(1.5*frameTimeCounter + 39 + pos.z)/80;
+		newpos.y += sin(3*frameTimeCounter + 20 + pos.z)/120 + cos(1*frameTimeCounter + 34 + pos.x)/80;
+		newpos.z += sin(3.5*frameTimeCounter + 29 + pos.x)/120 + cos(0.5*frameTimeCounter + 29 + pos.y)/80;
+	}
+
+	pos = newpos;
 
 	lightmapCoords = mat2(gl_TextureMatrix[1]) * gl_MultiTexCoord1.st;
 

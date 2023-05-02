@@ -8,6 +8,7 @@ varying vec4 glcolor;
 void main() {
 	vec4 color = texture2D(texture, texcoord) * glcolor;
 
-/* DRAWBUFFERS:0 */
+/* DRAWBUFFERS:03 */
 	gl_FragData[0] = color; //gcolor
+	gl_FragData[3] = vec4(0.0); //gcolor
 }

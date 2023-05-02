@@ -14,8 +14,9 @@ void main() {
 	color.rgb = mix(color.rgb, entityColor.rgb, entityColor.a);
 	//color *= texture2D(lightmap, lmcoord);
 
-/* DRAWBUFFERS:012 */
+/* DRAWBUFFERS:0123 */
 	gl_FragData[0] = color; //gcolor
 	gl_FragData[1] = vec4(Normal * 0.5f + 0.5f, 1.0f);
 	gl_FragData[2] = vec4(lmcoord, 0.0f, 1.0f);
+	gl_FragData[3] = vec4(0.0); //gcolor
 }
