@@ -22,9 +22,6 @@ void main() {
 	if(isWater > 0.5) {
 		vec2 inBlockOffset = mod(texcoord, vec2(1.0/64.0));
 		vec2 inMapOffset = texcoord - inBlockOffset;
-		//inBlockOffset += texture2D(noisetex, wPos.xz/16.0).rg / 1600;
-		
-		
 
 		inBlockOffset += vec2(cos(2*frameTimeCounter + wPos.x*18)/2 + sin(3*frameTimeCounter + wPos.z*17)/4, cos(2.35*frameTimeCounter + wPos.x*13)/2 + sin(4.2*frameTimeCounter + wPos.x*27)/4) / 1600;
 		inBlockOffset  = mod(inBlockOffset, vec2(1.0/64.0));
